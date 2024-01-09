@@ -34,6 +34,15 @@ namespace MoviesDB.Controllers
             return Ok(films);
         }
 
+        [HttpGet("lastid")]
+        public async Task<ActionResult<int>> GetLastId()
+        {
+            var lastFilm = await _filmsRepository.GetLastAsync();
+
+            //OK - 200 - Success
+            return Ok(lastFilm.FilmId);
+        }
+
         [HttpGet]
         [Route("{id:int}", Name = "GetFilmById")]
         public async Task<ActionResult<Film>> GetFilmByIdAsync(int id)

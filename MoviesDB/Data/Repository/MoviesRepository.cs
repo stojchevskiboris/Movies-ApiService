@@ -79,5 +79,10 @@ namespace MoviesDB.Data.Repository
 
         }
 
+        public async Task<T> GetLastAsync()
+        {
+            return await _dbSet.Reverse().FirstOrDefaultAsync();
+            
+        }
     }
 }

@@ -258,3 +258,4 @@ C:\Users\boriss\source\repos\MoviesDB\MoviesDB\bin\Debug\net8.0\AutoMapper.Exten
 C:\Users\boriss\source\repos\MoviesDB\MoviesDB\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\boriss\source\repos\MoviesDB\MoviesDB\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\boriss\source\repos\MoviesDB\MoviesDB\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Users\boriss\source\repos\MoviesDB\MoviesDB\obj\Debug\net8.0\MoviesDB.sourcelink.json
