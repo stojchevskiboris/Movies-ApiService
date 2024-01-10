@@ -21,5 +21,8 @@ namespace MoviesDB.Data.Repository
         List<T> GetPaginated(int page, int size);
 
         Task<T> GetLastAsync();
+
+        Task<T> GetFirstAsync();
+
     }
 }

@@ -39,8 +39,15 @@ namespace MoviesDB.Controllers
         {
             var lastFilm = await _filmsRepository.GetLastAsync();
 
-            //OK - 200 - Success
-            return Ok(lastFilm.FilmId);
+            return lastFilm != null ? Ok(lastFilm.FilmId) : NotFound();
+        }
+
+        [HttpGet("firstid")]
+        public async Task<ActionResult<int>> GetFirstId()
+        {
+            var firstFilm = await _filmsRepository.GetFirstAsync();
+
+            return firstFilm != null ? Ok(firstFilm.FilmId) : NotFound();
         }
 
         [HttpGet]

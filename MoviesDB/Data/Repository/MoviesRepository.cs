@@ -2,6 +2,7 @@
 using MoviesDB.Models;
 using System.Drawing;
 using System.Linq.Expressions;
+using System.Security.Policy;
 
 namespace MoviesDB.Data.Repository
 {
@@ -9,7 +10,6 @@ namespace MoviesDB.Data.Repository
     {
         private readonly SakilaDbContext _dbContext;
         private readonly DbSet<T> _dbSet;
-
 
         public MoviesRepository(SakilaDbContext dbContext)
         {
@@ -28,30 +28,27 @@ namespace MoviesDB.Data.Repository
             {
                 return await _dbSet.AsNoTracking().Where(filter).FirstOrDefaultAsync();
             }
+
             return await _dbSet.Where(filter).FirstOrDefaultAsync();
         }
 
         public async Task<T> GetByNameAsync(Expression<Func<T, bool>> filter)
         {
             return await _dbSet.Where(filter).FirstOrDefaultAsync();
-
         }
 
         public async Task<T> CreateAsync(T dbRecord)
         {
             _dbSet.Add(dbRecord);
             await _dbContext.SaveChangesAsync();
+
             return dbRecord;
         }
 
         public async Task<T> UpdateAsync(T dbRecord)
         {
-
-
             _dbSet.Update(dbRecord);
-
             _dbSet.Entry(dbRecord).State = EntityState.Modified;
-
             await _dbContext.SaveChangesAsync();
 
             return dbRecord;
@@ -73,16 +70,20 @@ namespace MoviesDB.Data.Repository
         public List<T> GetPaginated(int page, int size)
         {
             var records = _dbSet.ToList();
-            
+
             return records.Skip((page - 1) * size).Take(size).ToList();
-
-
         }
 
         public async Task<T> GetLastAsync()
         {
-            return await _dbSet.Reverse().FirstOrDefaultAsync();
-            
+            var cnt = _dbSet.ToList().Count();
+
+            return await _dbSet.Skip(cnt - 1).Take(1).FirstOrDefaultAsync();
+        }
+
+        public async Task<T> GetFirstAsync()
+        {
+            return await _dbSet.FirstOrDefaultAsync();
         }
     }
 }
